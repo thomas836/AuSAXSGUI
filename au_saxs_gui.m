@@ -22,7 +22,7 @@ function varargout = au_saxs_gui(varargin)
 
 % Edit the above text to modify the response to help au_saxs_gui
 
-% Last Modified by GUIDE v2.5 09-Jun-2017 16:05:38
+%
 
 
 % Begin initialization code - DO NOT EDIT
@@ -188,7 +188,6 @@ function load_data_Callback(hObject, eventdata, handles)
     cut1 = handles.q_min_cut;
     cut2 = handles.q_max_cut;
     
-   
     
     data_load = zeros(handles.number_of_files, 1);
 
@@ -197,37 +196,34 @@ function load_data_Callback(hObject, eventdata, handles)
     concentration = str2double(handles.file_names{iType, 3});
     exposures = handles.number_of_exp;
     concentration_error_load = [];
+    concentrationLoad(iType, 1) = 1;
         
          if isempty(handles.file_names{iType, 3})
                        
-            concentration_error_load = strcat('Missing concentration at ', num2str(iType), '!');
-            errordlg(concentration_error_load);   
+            concentration_error_load = strcat('Missing concentration in row ', num2str(iType), '!');
+            errordlg(concentration_error_load);
+            concentrationLoad(iType, 1) = 0;
             
          end
          
-         
-         
         % handles.saxs_data{iType}=load_individual_samples(handles.file_names{iType, 1}, handles.file_names{iType, 2}, cut1,cut2,concentration, exposures);
-
-         
+    
         try
-            
-             
+          
            handles.saxs_data{iType}=load_individual_samples(handles.file_names{iType, 1}, handles.file_names{iType, 2}, cut1,cut2,concentration, handles, exposures);
-           
-           
+          
            data_load(iType, 1) = 1;
 
         catch
 
-            file_error_load = strcat('Missing filename at ', num2str(iType), '!');
+            file_error_load = strcat('Missing or wrong filename in row ', num2str(iType), '!');
             errordlg(file_error_load);    
             data_load(iType, 1) = 0;
         end
 
     end
     
-if isempty(find(data_load==0)) && isempty(concentration_error_load)
+if isempty(find(data_load==0)) && isempty(find(concentrationLoad==0))
     msgbox('All data was successfully imported!');
 end
     
