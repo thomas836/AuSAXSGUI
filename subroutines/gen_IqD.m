@@ -1,0 +1,1 @@
+function IqD=gen_IqD(Ic2c0,sval,Dval)%% Usage: IqD=gen_IqD(Ic2c0,sval,Dval)%IqD=zeros(length(sval),length(Dval));%for i=1:length(Ic2c0)    if sval(i)==0        IqD(i,:)=Ic2c0(i)*ones(1,length(Dval));    else        IqD(i,:)=(Ic2c0(i)*sin(2*pi*sval(i)*Dval)./(2*pi*sval(i)*Dval))';    endend	  
