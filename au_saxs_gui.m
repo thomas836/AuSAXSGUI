@@ -79,9 +79,9 @@ set(handles.edt_au_label_pos,'String',num2str(handles.au_lb_nr));
 set(handles.edt_a_label_pos,'String',num2str(handles.a_lb_nr)); 
 set(handles.edt_b_label_pos,'String',num2str(handles.b_lb_nr)); 
 set(handles.edt_double_label_pos,'String',num2str(handles.double_lb_nr)); 
-set(handles.edt_unlabel_pos,'String',num2str(handles.un_lb_nr)); 
-    
-
+set(handles.edt_unlabel_pos,'String',num2str(handles.un_lb_nr));
+p = mfilename('fullpath');
+addpath(strcat(p(1:end-11), '/subroutines'));
 handles.choice_I_d = 5;
 set(handles.edt_choice_I_d,'String',num2str(handles.choice_I_d)); 
 
@@ -135,7 +135,7 @@ handles.path_on_off = get(handles.data_path,'String');
 
 
 if strcmp(handles.path_on_off, 'Data path') ~= 1 
-   %rmpath(handles.data_directory);
+   rmpath(handles.data_directory);
 end
 
 
